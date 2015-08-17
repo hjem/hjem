@@ -12,5 +12,5 @@
 */
 
 Route::group(['prefix' => 'v1'], function() {
-	Route::get('{type}/{name?}', 'SensorController@query');
+	Route::get('current/{type}/{name?}', 'SensorController@query');
 });

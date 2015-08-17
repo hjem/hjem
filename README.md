@@ -11,3 +11,23 @@ The app has three main purposes:
 * **A central API to interact with and access all your devices:** Build your own custom apps, with one central API to control and consume data from your smart devices.
 * **Collect & visualize data:** Monitor your electricy usage, temperature, etc.
 * **Triggers and timers:** Flash lightbulbs when the washer is ready, fire up some music on your Sonos Speakers to wake you up in the morning, etc.
+
+
+## API
+
+### Retrieve data
+
+**GET** `/v1/current/{SENSOR_TYPE}/{NAME}`
+
+Currently available sensor types:
+* Temperature
+* Humidity
+* Away
+
+The `NAME` parameter is optional. If none is specified the default value for the sensor is returned (e.g. indoor temperature if you specify *temperature* as the sensor type).
+
+#### Examples
+* `/v1/current/temperature` &mdash; Returns current indoor temperature
+* `/v1/current/temperature/target` &mdash; Returns target temperature
+* `/v1/current/humidity` &mdash; Returns the current humidity
+* `/v1/current/away` &mdash; Returns whether someone is home or not *(yet another reason not to make your API public :))*
