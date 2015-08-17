@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c6026b96e6fa11a641b51a6ba976f5e",
+    "hash": "c14b877864c5ba5e7f274cb3a1110fa7",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -215,6 +215,44 @@
                 "string"
             ],
             "time": "2014-12-20 21:24:13"
+        },
+        {
+            "name": "gboudreau/nest-api",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gboudreau/nest-api.git",
+                "reference": "648d61b8964d40f4b936fb598c90404dd25048b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gboudreau/nest-api/zipball/648d61b8964d40f4b936fb598c90404dd25048b5",
+                "reference": "648d61b8964d40f4b936fb598c90404dd25048b5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "Guillaume Boudreau",
+                    "email": "guillaume@pommepause.com",
+                    "homepage": "https://www.pommepause.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is a simple library that will allow you to monitor and control your Nest Learning Thermostat, and Nest Protect.",
+            "homepage": "https://github.com/gboudreau/nest-api",
+            "keywords": [
+                "api",
+                "nest"
+            ],
+            "time": "2015-03-27 23:48:19"
         },
         {
             "name": "jakub-onderka/php-console-color",
