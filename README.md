@@ -12,7 +12,6 @@ The app has three main purposes:
 * **Collect & visualize data:** Monitor your electricy usage, temperature, etc.
 * **Triggers and timers:** Flash lightbulbs when the washer is ready, fire up some music on your Sonos Speakers to wake you up in the morning, etc.
 
-
 ## API
 
 ### Retrieve data
@@ -31,3 +30,17 @@ The `NAME` parameter is optional. If none is specified the default value for the
 * `/v1/current/temperature/target` &mdash; Returns target temperature
 * `/v1/current/humidity` &mdash; Returns the current humidity
 * `/v1/current/away` &mdash; Returns whether someone is home or not *(yet another reason not to make your API public :))*
+
+## Providers
+
+### Current
+* Nest Learning Thermostat
+
+### Planned
+* Philips Hue
+* Alarm.com
+* Weather (Temperature/Rain/Wind)
+* Amazon Echo
+* Washington Gas usage
+* Dominion &mdash; Electricy usage
+* Custom sensors (E.g. my homemade washer/dryer cycle sensor)
