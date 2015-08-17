@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use Illuminate\Support\Str;
+use App\Activity;
 
 class ProviderManager {
 
@@ -12,14 +13,21 @@ class ProviderManager {
 
 	public static function pull() {
 		foreach (self::$providers as $providerName) {
-			info($providerName);
+			self::pullDataForProvider($providerName);
+		}
+	}
 
-			$provider = new $providerName;
+	private static function pullDataForProvider($providerName) {
+		$provider = new $providerName;
 
-			foreach ($provider->providesSensors() as $name => $type) {
-				$val = $provider->{'get' . Str::studly($name)}();
-				info($name . ' (' . $type . ')' . ': ' . $val);
-			}
+		foreach ($provider->providesSensors() as $name => $type) {
+			$val = $provider->{'get' . Str::studly($name)}();
+
+			$activity = new Activity;
+			$activity->provider = $providerName;
+			$activity->name = $name;
+			$activity->value = $val;
+			$activity->save();
 		}
 	}
 
