@@ -2,7 +2,7 @@
 
 namespace App\Support;
 
-class SensorTypes {
+abstract class SensorTypes extends BasicEnum {
 
 	const TEMPERATURE = 'TEMPERATURE';
 	const HUMIDITY = 'HUMIDITY';

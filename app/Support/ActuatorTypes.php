@@ -2,7 +2,7 @@
 
 namespace App\Support;
 
-class ActuatorTypes {
+abstract class ActuatorTypes extends BasicEnum {
 
 	const TARGET_TEMPERATURE = 'TARGET_TEMPERATURE';
 	const AWAY = 'AWAY';

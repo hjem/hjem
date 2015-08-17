@@ -14,16 +14,16 @@ class NestThermostatProvider {
 
 	public function providesSensors() {
 		return [
-			'Indoor Temperature' => SensorTypes::TEMPERATURE,
-			'Target Temperature' => SensorTypes::TEMPERATURE,
-			'Indoor Humidity' => SensorTypes::HUMIDITY,
+			'Indoor' => SensorTypes::TEMPERATURE,
+			'Target' => SensorTypes::TEMPERATURE,
+			'Humidity' => SensorTypes::HUMIDITY,
 			'Away' => SensorTypes::AWAY
 		];
 	}
 
 	public function providesActuators() {
 		return [
-			'Target Temperature' => ActuatorTypes::TARGET_TEMPERATURE,
+			'Target' => ActuatorTypes::TARGET_TEMPERATURE,
 			'Away' => ActuatorTypes::AWAY
 		];
 	}
