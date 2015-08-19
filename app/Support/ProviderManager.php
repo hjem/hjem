@@ -8,7 +8,8 @@ use App\Activity;
 class ProviderManager {
 
 	private static $providers = [
-		Providers\NestThermostatProvider::class
+		Providers\NestThermostatProvider::class,
+		Providers\PhilipsHueProvider::class,
 	];
 
 	public static function pull() {

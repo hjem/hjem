@@ -7,7 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "gboudreau/nest-api": "^1.0"
+        "gboudreau/nest-api": "^1.0",
+        "sqmk/phue": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

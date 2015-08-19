@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c14b877864c5ba5e7f274cb3a1110fa7",
+    "hash": "da8771bc9e1f015486816b713af40ec7",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -929,6 +929,64 @@
                 "shell"
             ],
             "time": "2015-07-16 15:26:57"
+        },
+        {
+            "name": "sqmk/phue",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sqmk/Phue.git",
+                "reference": "2711cc4e76e6bb0f9121dfc636ec807f4c703e90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sqmk/Phue/zipball/2711cc4e76e6bb0f9121dfc636ec807f4c703e90",
+                "reference": "2711cc4e76e6bb0f9121dfc636ec807f4c703e90",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.8.0",
+                "phpunit/phpunit": "3.7.25",
+                "squizlabs/php_codesniffer": "1.4.6"
+            },
+            "suggest": {
+                "ext-curl": "Allows usage of cURL transport adapter"
+            },
+            "bin": [
+                "bin/phue-create-user",
+                "bin/phue-bridge-finder",
+                "bin/phue-light-finder",
+                "bin/phue-list-lights"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Phue": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Squires",
+                    "email": "sqmk@php.net",
+                    "role": "lead"
+                }
+            ],
+            "description": "Phue - Philips Hue PHP client",
+            "homepage": "http://github.com/sqmk/Phue",
+            "keywords": [
+                "client",
+                "hue",
+                "philips",
+                "phue"
+            ],
+            "time": "2015-02-27 16:45:45"
         },
         {
             "name": "swiftmailer/swiftmailer",
