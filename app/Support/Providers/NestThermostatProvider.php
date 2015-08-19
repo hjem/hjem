@@ -6,11 +6,18 @@ use App\Support\SensorTypes;
 use App\Support\ActuatorTypes;
 use Nest;
 
-require(__DIR__ . '/../../../vendor/gboudreau/nest-api/nest.class.php'); // Quick work-around since this library doesn't have an autoloader set up with composer \o/
+if (!class_exists('Nest')) {
+	// Quick work-around since this library doesn't have an autoloader set up with composer \o/
+	require(__DIR__ . '/../../../vendor/gboudreau/nest-api/nest.class.php');
+}
 
-class NestThermostatProvider {
+class NestThermostatProvider extends Provider {
 
 	private $nest;
+
+	public function __construct() {
+		$this->nest = new Nest(config('providers.nest_thermostat.email'), config('providers.nest_thermostat.password'));
+	}
 
 	public function providesSensors() {
 		return [
@@ -28,8 +35,8 @@ class NestThermostatProvider {
 		];
 	}
 
-	public function __construct() {
-		$this->nest = new Nest(config('providers.nest_thermostat.email'), config('providers.nest_thermostat.password'));
+	public function setNest(Nest $nest) {
+		$this->nest = $nest;
 	}
 
 	private function getInfo($key = null) {
@@ -51,7 +58,7 @@ class NestThermostatProvider {
 		return implode('-', (array)$this->getInfo('target.temperature')); // May be temperature range
 	}
 
-	public function getIndoorHumidity() {
+	public function getHumidity() {
 		return $this->getInfo('current_state.humidity');
 	}
 
@@ -59,10 +66,10 @@ class NestThermostatProvider {
 		return $this->getInfo('current_state.auto_away') == 1 || $this->getInfo('current_state.manual_away');
 	}
 
-	public function setTargetTemperature($away) {
+	public function setTargetTemperature($targetTemperature) {
 		$existingTargetTemperatureType = $this->getInfo('target.mode');
 
-		$nest->nest->setTargetTemperatureMode($existingTargetTemperatureType, 23.0);
+		$this->nest->setTargetTemperatureMode($existingTargetTemperatureType, $targetTemperature);
 	}
 
 	public function setAway($away) {
