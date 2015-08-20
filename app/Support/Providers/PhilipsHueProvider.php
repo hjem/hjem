@@ -4,13 +4,17 @@ namespace App\Support\Providers;
 
 use App\Support\ActuatorTypes;
 use App\Support\NoMatchException;
+use Phue\Client;
 
 class PhilipsHueProvider extends Provider {
 
 	private $client;
 
 	public function __construct() {
-		$this->client = new Nest(config('providers.philips_hue.hub_ip_address'), config('providers.philips_hue.username'));
+		$this->client = new Client(
+			config('providers.philips_hue.hub_ip_address'),
+			config('providers.philips_hue.username')
+		);
 	}
 
 	public function providesActuators() {
@@ -52,7 +56,7 @@ class PhilipsHueProvider extends Provider {
 		$light->setXY($x, $y);
 	}
 
-	private function convertRGBToCIE1931($r, $g, $b) {
+	public function convertRGBToCIE1931($r, $g, $b) {
 		$X = 0.4124*$r + 0.3576*$g + 0.1805*$b;
 		$Y = 0.2126*$r + 0.7152*$g + 0.0722*$b;
 
