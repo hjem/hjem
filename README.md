@@ -12,6 +12,16 @@ The app has three main purposes:
 * **Collect & visualize data:** Monitor your electricy usage, temperature, etc.
 * **Triggers and timers:** Flash lightbulbs when the washer is ready, fire up some music on your Sonos Speakers to wake you up in the morning, etc.
 
+## Installation
+You can install "hjem" like any other composer-based PHP app, in addition please make sure to create the `storage/database.sqlite` file for the sqlite database.
+
+```bash
+git clone git@github.com:hjem/hjem.git
+cd hjem
+composer install
+touch storage/database.sqlite
+```
+
 ## API
 
 ### Retrieve data
