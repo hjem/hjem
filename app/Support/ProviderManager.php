@@ -10,6 +10,7 @@ class ProviderManager {
 	private static $providers = [
 		Providers\NestThermostatProvider::class,
 		Providers\PhilipsHueProvider::class,
+		Providers\SonosSpotifyProvider::class,
 	];
 
 	public static function pull() {
@@ -58,9 +59,7 @@ class ProviderManager {
 
 				$functionName = self::getFunctionName($name, $type, 'set');
 
-				$provider->{$functionName}($value);
-
-				return;
+				return $provider->{$functionName}($value);
 			}
 		}
 

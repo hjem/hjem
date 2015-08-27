@@ -19,9 +19,17 @@ class ActuatorController extends Controller
         try {
             $this->validateType($type);
 
-            ProviderManager::setActuator($type, $value);
+            $value = ProviderManager::setActuator($type, $value);
+
+            $response = [
+                'success' => true
+            ];
+
+            if ($value) {
+                $response['value'] = $value;
+            }
             
-            return response()->json(['success' => true]);
+            return response()->json($response);
 
         } catch (NoMatchException $e) {
             return response()->json(['error' => $e->getMessage()], 422);
