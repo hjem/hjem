@@ -6,20 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Support\SensorTypes;
+use App\Support\ActuatorTypes;
 use App\Support\NoMatchException;
 use App\Support\ProviderManager;
 
-class SensorController extends Controller
+class ActuatorController extends Controller
 {
     
-    public function query($type, $name = null) {
+    public function set($type, $value) {
         $type = strtoupper($type);
 
         try {
             $this->validateType($type);
+
+            ProviderManager::setActuator($type, $value);
             
-            return response()->json(ProviderManager::getDataForQuery($type, $name));
+            return response()->json(['success' => true]);
 
         } catch (NoMatchException $e) {
             return response()->json(['error' => $e->getMessage()], 422);
@@ -27,7 +29,7 @@ class SensorController extends Controller
     }
 
     private function validateType($type) {
-        if (!SensorTypes::isValidName($type)) {
+        if (!ActuatorTypes::isValidName($type)) {
             throw new NoMatchException('Unsupported type "' . $type . '"');
         }
     }

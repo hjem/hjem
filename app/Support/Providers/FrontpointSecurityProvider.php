@@ -6,7 +6,7 @@ use App\Support\ActuatorTypes;
 use App\Support\NoMatchException;
 use Phue\Client;
 
-class PhilipsHueProvider extends Provider {
+class FrontpointSecurityProvider extends Provider {
 
 	private $client;
 
@@ -15,10 +15,6 @@ class PhilipsHueProvider extends Provider {
 			config('providers.philips_hue.hub_ip_address'),
 			config('providers.philips_hue.username')
 		);
-	}
-
-	public function providesSensors() {
-		return [];
 	}
 
 	public function providesActuators() {
