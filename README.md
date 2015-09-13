@@ -24,7 +24,9 @@ touch storage/database.sqlite
 
 ## API
 
-### Retrieve data
+> The API is a work in progress and *will* change slightly as additional sensors and actuator types are added.
+
+### Retrieve data (sensors)
 
 **GET** `/v1/current/{SENSOR_TYPE}/{NAME}`
 
@@ -40,6 +42,28 @@ The `NAME` parameter is optional. If none is specified the default value for the
 * `/v1/current/temperature/target` &mdash; Returns target temperature
 * `/v1/current/humidity` &mdash; Returns the current humidity
 * `/v1/current/away` &mdash; Returns whether someone is home or not *(yet another reason not to make your API public :))*
+
+### Perform action (actuators)
+
+**POST** `/v1/set/{ACTUATOR_TYPE}/{ACTION}/{VALUE}`
+
+Currently available actuator types:
+* Target Temperature
+* Away
+* Light On
+* Light Off
+* Light Color
+* Music Pause
+
+#### Examples
+* `/v1/set/target_temperature/72` &mdash; Sets the target temperature to 72 degrees
+* `/v1/set/away/true` &mdash; Sets away status to true
+* `/v1/set/away/fals` &mdash; Sets away status to fals
+* `/v1/set/music_pause/true` &mdash; Pauses the music
+* `/v1/set/music_pause/false` &mdash; Resumes the music
+* `/v1/set/light_on` &mdash; Turns on the lights
+* `/v1/set/light_off` &mdash; Turns off the lights
+* `/v1/set/light_color` &mdash; Changes lights to a specific color
 
 ## Providers
 
