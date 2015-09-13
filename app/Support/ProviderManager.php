@@ -10,7 +10,7 @@ class ProviderManager {
 	private static $providers = [
 		Providers\NestThermostatProvider::class,
 		Providers\PhilipsHueProvider::class,
-		Providers\SonosSpotifyProvider::class,
+		Providers\SonosProvider::class,
 	];
 
 	public static function pull() {

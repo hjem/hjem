@@ -45,12 +45,11 @@ The `NAME` parameter is optional. If none is specified the default value for the
 
 ### Current
 * Nest Learning Thermostat
-
-### Planned
 * Philips Hue
 * Alarm.com
+
+### Planned
 * Weather (Temperature/Rain/Wind)
-* Amazon Echo
 * Washington Gas usage
 * Dominion &mdash; Electricy usage
 * Custom sensors (E.g. my homemade washer/dryer cycle sensor)
