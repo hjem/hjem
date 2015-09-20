@@ -13,13 +13,13 @@ use App\Support\ProviderManager;
 class ActuatorController extends Controller
 {
     
-    public function set($type, $value) {
+    public function set($type, $value, Request $request) {
         $type = strtoupper($type);
 
         try {
             $this->validateType($type);
 
-            $value = ProviderManager::setActuator($type, $value);
+            $value = ProviderManager::setActuator($type, $value, $request->json()->all());
 
             $response = [
                 'success' => true

@@ -23,9 +23,7 @@ class PhilipsHueProvider extends Provider {
 
 	public function providesActuators() {
 		return [
-			'LightOn' => ActuatorTypes::LIGHT_ON,
-			'LightOff' => ActuatorTypes::LIGHT_OFF,
-			'LightColor' => ActuatorTypes::LIGHT_COLOR,
+			'Lights' => ActuatorTypes::LIGHTS
 		];
 	}
 
@@ -43,26 +41,54 @@ class PhilipsHueProvider extends Provider {
 		return $lights[$lightId];
 	}
 
-	public function setLightOn($lightId) {
-		$light = $this->getLight($lightId);
-		$light->setOn(true);
+	public function setLights($action, $options = null) {
+		if (!$options || !isset($options['id'])) {
+			$lights = $this->client->getLights();
+		} else {
+			$lights = [$this->getLight($options['id'])];
+		}
+
+		switch ($action) {
+			case 'on':
+				foreach ($lights as $light) {
+					$this->setLightOn($light, true);
+				}
+				break;
+
+			case 'off':
+				foreach ($lights as $light) {
+					$this->setLightOn($light, false);
+				}
+				break;
+
+			case 'color':
+				foreach ($lights as $light) {
+					$this->setLightOn($light, true);
+					$this->setLightColor($light, $options['r'], $options['g'], $options['b']);
+				}
+				break;
+			
+			default:
+				throw new InvalidArgumentException('Invalid light action: ' . $action);
+				break;
+		}
 	}
 
-	public function setLightOff($lightId) {
+	private function setLightOn($lightId, $shouldBeOn) {
 		$light = $this->getLight($lightId);
-		$light->setOn(false);
+		$light->setOn($shouldBeOn);
 	}
 
-	public function setLightColor($lightId, $r, $g, $b) {
+	private function setLightColor($lightId, $r, $g, $b) {
 		$light = $this->getLight($lightId);
 
 		list($x, $y) = $this->convertRGBToCIE1931($r, $g, $b);
 		$light->setXY($x, $y);
 	}
 
-	public function convertRGBToCIE1931($r, $g, $b) {
-		$X = 0.4124*$r + 0.3576*$g + 0.1805*$b;
-		$Y = 0.2126*$r + 0.7152*$g + 0.0722*$b;
+	private function convertRGBToCIE1931($r, $g, $b) {
+		$X = 0.4124 * $r + 0.3576 * $g + 0.1805 * $b;
+		$Y = 0.2126 * $r + 0.7152 * $g + 0.0722 * $b;
 
 		$x = $X / ($X + $Y + $Z);
 		$y = $Y / ($X + $Y + $Z);

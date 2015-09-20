@@ -66,7 +66,7 @@ class NestThermostatProvider extends Provider {
 		return $this->getInfo('current_state.auto_away') == 1 || $this->getInfo('current_state.manual_away');
 	}
 
-	public function setTargetTemperature($targetTemperature) {
+	public function setTargetTemperature($targetTemperature, $options = null) {
 		$existingTargetTemperatureType = $this->getInfo('target.mode');
 
 		$this->nest->setTargetTemperatureMode($existingTargetTemperatureType, $targetTemperature);

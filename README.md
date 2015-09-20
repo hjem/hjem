@@ -59,11 +59,12 @@ Currently available actuator types:
 * `/v1/set/target_temperature/72` &mdash; Sets the target temperature to 72 degrees
 * `/v1/set/away/on` &mdash; Sets status as being away
 * `/v1/set/away/off` &mdash; Sets status as being at home
-* `/v1/set/music/pause` &mdash; Pauses the music
-* `/v1/set/music/resume` &mdash; Resumes the music
+* `/v1/set/speaker/pause` &mdash; Pauses the speaker
+* `/v1/set/speaker/play` &mdash; Resumes the speaker
 * `/v1/set/lights/on` &mdash; Turns on the lights
 * `/v1/set/lights/off` &mdash; Turns off the lights
 * `/v1/set/lights/color` &mdash; Changes lights to a specific color
+	* {r: 255, g: 0, b: 255}
 
 ## Providers
 

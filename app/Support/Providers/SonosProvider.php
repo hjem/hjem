@@ -7,6 +7,8 @@ use App\Support\NoMatchException;
 
 use duncan3dc\Sonos\Network;
 
+use InvalidArgumentException;
+
 class SonosProvider extends Provider {
 
 	private $client;
@@ -29,15 +31,21 @@ class SonosProvider extends Provider {
 		$this->client = $client;
 	}
 
-	public function setMusicPause($val) {
-		$shouldPause = ($val == 'true');
-
+	public function setSpeaker($action, $options = null) {
 		$controller = $this->client->getController();
 
-		if ($shouldPause) {
-			$controller->pause();
-		} else {
-			$controller->play();
+		switch ($action) {
+			case 'pause':
+				$controller->pause();
+				break;
+
+			case 'play':
+				$controller->play();
+				break;
+			
+			default:
+				throw new InvalidArgumentException('Invalid speaker action: ' . $action);
+				break;
 		}
 	}
 	

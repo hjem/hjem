@@ -7,21 +7,26 @@ use App\Activity;
 
 class ProviderManager {
 
-	private static $providers = [
-		Providers\NestThermostatProvider::class,
-		Providers\PhilipsHueProvider::class,
-		Providers\SonosProvider::class,
-	];
+	public static $providers = [];
+
+	public static function init() {
+		if (count(self::$providers) <= 0) {
+			self::$providers = [
+				new Providers\NestThermostatProvider,
+				new Providers\PhilipsHueProvider,
+				new Providers\SonosProvider,
+			];
+		}
+	}
 
 	public static function pull() {
-		foreach (self::$providers as $providerName) {
-			self::pullDataForProvider($providerName);
+		foreach (self::$providers as $provider) {
+			self::pullDataForProvider($provider);
 		}
 	}
 
 	public static function getDataForQuery($targetType, $targetName = null) {
-		foreach (self::$providers as $providerName) {
-			$provider = new $providerName;
+		foreach (self::$providers as $provider) {
 
 			foreach ($provider->providesSensors() as $name => $type) {
 				if ($targetName !== null && strcasecmp($name, $targetName) !== 0) {
@@ -37,7 +42,7 @@ class ProviderManager {
 				$val = $provider->{$functionName}();
 
 				return [
-					'provider' => self::simpleProviderName($providerName),
+					'provider' => self::simpleProviderName(get_class($provider)),
 					'name' => self::humanReadableName($name, $type),
 					'type' => $type,
 					'value' => $val
@@ -48,10 +53,8 @@ class ProviderManager {
 		throw new NoMatchException('No active provider has any data on this');
 	}
 
-	public static function setActuator($targetType, $value) {
-		foreach (self::$providers as $providerName) {
-			$provider = new $providerName;
-
+	public static function setActuator($targetType, $value, $options = null) {
+		foreach (self::$providers as $provider) {
 			foreach ($provider->providesActuators() as $name => $type) {
 				if (strcasecmp($type, $targetType) !== 0) {
 					continue;
@@ -59,7 +62,7 @@ class ProviderManager {
 
 				$functionName = self::getFunctionName($name, $type, 'set');
 
-				return $provider->{$functionName}($value);
+				return $provider->{$functionName}($value, $options);
 			}
 		}
 
@@ -96,9 +99,7 @@ class ProviderManager {
 		return $result;
 	}
 
-	private static function pullDataForProvider($providerName) {
-		$provider = new $providerName;
-
+	private static function pullDataForProvider($provider) {
 		foreach ($provider->providesSensors() as $name => $type) {
 
 			$functionName = self::getFunctionName($name, $type);
@@ -106,7 +107,7 @@ class ProviderManager {
 			$val = $provider->{$functionName}();
 
 			$activity = new Activity;
-			$activity->provider = $providerName;
+			$activity->provider = get_class($provider);
 			$activity->name = $name;
 			$activity->value = $val;
 			$activity->save();
