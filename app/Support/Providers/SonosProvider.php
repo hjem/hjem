@@ -23,7 +23,7 @@ class SonosProvider extends Provider {
 
 	public function providesActuators() {
 		return [
-			'MusicPause' => ActuatorTypes::MUSIC_PAUSE
+			'Speaker' => ActuatorTypes::SPEAKER
 		];
 	}
 

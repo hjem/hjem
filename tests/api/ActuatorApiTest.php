@@ -23,6 +23,42 @@ class ActuatorApiTest extends TestCase
 			]);
 	}
 
+	public function testSetAway() {
+		$mockProvider = \Mockery::mock(App\Support\Providers\NestThermostatProvider::class)
+			->shouldReceive('providesActuators')
+			->andReturn(['Away' => ActuatorTypes::AWAY])
+			->shouldReceive('setAway')
+			->with('on', [])
+			->mock();
+
+		ProviderManager::$providers = [
+			$mockProvider
+		];
+
+		$this->post('/v1/set/away/on')
+			->seeJson([
+				'success' => true,
+			]);
+	}
+
+	public function testSpeaker() {
+		$mockProvider = \Mockery::mock(App\Support\Providers\SonosProvider::class)
+			->shouldReceive('providesActuators')
+			->andReturn(['Speaker' => ActuatorTypes::SPEAKER])
+			->shouldReceive('setSpeaker')
+			->with('play', [])
+			->mock();
+
+		ProviderManager::$providers = [
+			$mockProvider
+		];
+
+		$this->post('/v1/set/speaker/play')
+			->seeJson([
+				'success' => true,
+			]);
+	}
+
 	public function testSetLightsOn() {
 		$mockProvider = \Mockery::mock(App\Support\Providers\PhilipsHueProvider::class)
 			->shouldReceive('providesActuators')
