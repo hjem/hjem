@@ -45,7 +45,7 @@ The `NAME` parameter is optional. If none is specified the default value for the
 
 ### Perform action (actuators)
 
-**POST** `/v1/set/{ACTUATOR_TYPE}/{ACTION}/{VALUE}`
+**POST** `/v1/set/{ACTUATOR_TYPE}/{VALUE}`
 
 Currently available actuator types:
 * Target Temperature
@@ -57,13 +57,13 @@ Currently available actuator types:
 
 #### Examples
 * `/v1/set/target_temperature/72` &mdash; Sets the target temperature to 72 degrees
-* `/v1/set/away/true` &mdash; Sets away status to true
-* `/v1/set/away/fals` &mdash; Sets away status to fals
-* `/v1/set/music_pause/true` &mdash; Pauses the music
-* `/v1/set/music_pause/false` &mdash; Resumes the music
-* `/v1/set/light_on` &mdash; Turns on the lights
-* `/v1/set/light_off` &mdash; Turns off the lights
-* `/v1/set/light_color` &mdash; Changes lights to a specific color
+* `/v1/set/away/on` &mdash; Sets status as being away
+* `/v1/set/away/off` &mdash; Sets status as being at home
+* `/v1/set/music/pause` &mdash; Pauses the music
+* `/v1/set/music/resume` &mdash; Resumes the music
+* `/v1/set/lights/on` &mdash; Turns on the lights
+* `/v1/set/lights/off` &mdash; Turns off the lights
+* `/v1/set/lights/color` &mdash; Changes lights to a specific color
 
 ## Providers
 
